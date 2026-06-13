@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "ShareOn Learning"
+version = "1.0.0"
+id = "artifacts/shareon-learning"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22819
+
+[services.development]
+run = "pnpm --filter @workspace/shareon-learning run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/shareon-learning", "run", "build" ]
+publicDir = "artifacts/shareon-learning/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22819"
+BASE_PATH = "/"
